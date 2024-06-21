@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class FakeStoreProductService implements ProductService{
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate=null;
      FakeStoreProductService(RestTemplate restTemplate){
         this.restTemplate=restTemplate;
     }
@@ -42,6 +42,6 @@ public class FakeStoreProductService implements ProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return new ArrayList<>();
+        return new ArrayList<Product>();
     }
 }
