@@ -2,6 +2,8 @@ package com.example.simplespring.Controllers;
 
 import com.example.simplespring.Models.*;
 import com.example.simplespring.Services.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,8 +19,12 @@ public class ProductController {
         this.productService=productService;
     }
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long id){
-        return productService.getProductByID(id);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id){
+         Product p = productService.getProductByID(id);
+         if(p==null){
+             return new ResponseEntity<>(p,HttpStatus.BAD_REQUEST);
+         }
+        return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
     @GetMapping()
