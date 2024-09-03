@@ -1,5 +1,6 @@
 package com.example.simplespring.exceptionhandler;
 
+import com.example.simplespring.Dtos.ExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,6 +16,13 @@ public class ExceptionHandlers {
     }
     @ExceptionHandler(UnknownHostException.class)
     public  ResponseEntity<String> hostnotfound(){
-        return new ResponseEntity<>(new String("backend Unreachable"),HttpStatus.BAD_GATEWAY);
+        return new ResponseEntity<>("Unreachable Backend",HttpStatus.BAD_GATEWAY);
+    }
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ExceptionDTO> handleNullpointerException(){
+        ExceptionDTO exceptionDTO = new ExceptionDTO();
+        exceptionDTO.setMessage("Nullpointer Exception");
+        exceptionDTO.setResolution("Product not found");
+        return new ResponseEntity<ExceptionDTO>(exceptionDTO,HttpStatus.BAD_REQUEST);
     }
 }
