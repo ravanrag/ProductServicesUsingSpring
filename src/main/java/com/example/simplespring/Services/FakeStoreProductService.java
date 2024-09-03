@@ -2,6 +2,7 @@ package com.example.simplespring.Services;
 
 import ch.qos.logback.core.joran.sanity.Pair;
 import com.example.simplespring.Dtos.FakeStoreProductDTO;
+import com.example.simplespring.Exceptions.ProductNotFoundException;
 import com.example.simplespring.Models.Category;
 import com.example.simplespring.Models.Product;
 import org.springframework.http.HttpMethod;
@@ -35,11 +36,11 @@ public class FakeStoreProductService implements ProductService{
         return p;
     }
     @Override
-    public Product getProductByID(Long id) {
+    public Product getProductByID(Long id) throws ProductNotFoundException,NullPointerException {
         FakeStoreProductDTO fakeStoreProductDTO =
         restTemplate.getForObject("https://fakestoreapi.com/products/"+id, FakeStoreProductDTO.class);
         if(fakeStoreProductDTO==null)
-            throw new NullPointerException("FakeStoreProductDTO is null");
+            throw new ProductNotFoundException("FakeStoreProductDTO is null");
         return convertFakeStoreDTOtoProduct(fakeStoreProductDTO);
     }
 

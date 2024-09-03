@@ -1,5 +1,6 @@
 package com.example.simplespring.Controllers;
 
+import com.example.simplespring.Exceptions.ProductNotFoundException;
 import com.example.simplespring.Models.*;
 import com.example.simplespring.Services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,8 @@ public class ProductController {
         this.productService=productService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id){
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
          Product p = productService.getProductByID(id);
-         if(p==null){
-                 throw new NullPointerException();
-         }
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
