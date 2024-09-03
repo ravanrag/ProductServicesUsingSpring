@@ -21,7 +21,7 @@ public class ProductController {
     public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id){
          Product p = productService.getProductByID(id);
          if(p==null){
-             return new ResponseEntity<>(p,HttpStatus.BAD_REQUEST);
+                 return new ResponseEntity<>(p,HttpStatus.BAD_REQUEST);
          }
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
