@@ -1,6 +1,8 @@
 package com.example.simplespring.exceptionhandler;
 
-import com.example.simplespring.Dtos.ExceptionDTO;
+import com.example.simplespring.Dtos.ProductExceptionDTO;
+import com.example.simplespring.Dtos.ProductExceptionDTO;
+import com.example.simplespring.Exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,11 +20,12 @@ public class ExceptionHandlers {
     public  ResponseEntity<String> hostnotfound(){
         return new ResponseEntity<>("Unreachable Backend",HttpStatus.BAD_GATEWAY);
     }
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ExceptionDTO> handleNullpointerException(){
-        ExceptionDTO exceptionDTO = new ExceptionDTO();
-        exceptionDTO.setMessage("Nullpointer Exception");
-        exceptionDTO.setResolution("Product not found");
-        return new ResponseEntity<ExceptionDTO>(exceptionDTO,HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ProductExceptionDTO> handleProductNotFoundException(ProductNotFoundException e){
+        ProductExceptionDTO exceptionDTO = new ProductExceptionDTO();
+        exceptionDTO.setMessage("the product with Product id " + e.getProductId()+" is not found");
+        exceptionDTO.setResolution("enter the correct product id");
+        return new ResponseEntity<>(exceptionDTO,HttpStatus.BAD_REQUEST);
     }
+
 }

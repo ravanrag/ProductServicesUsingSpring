@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ExceptionDTO {
+public class ProductExceptionDTO {
 
     private String message;
     private String resolution;
