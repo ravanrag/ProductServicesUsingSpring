@@ -20,18 +20,20 @@ public class ProductController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
-         Product p = productService.getProductByID(id);
+        Product p = productService.getProductByID(id);
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
-    @GetMapping()
-    public List<Product> getAllProduct(){
-        return productService.getAllProducts();
+    @GetMapping({"","/"})
+    public ResponseEntity<List<Product>> getAllProduct(){
+        return new ResponseEntity<>(productService.getAllProducts(),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public Product replaceProduct(@PathVariable("id") Long Id,@RequestBody Product product){
-        return productService.replaceProduct(Id, product);
+    public ResponseEntity<Product> replaceProduct(@PathVariable("id") Long Id,@RequestBody Product product){
+        Product p = productService.replaceProduct(Id, product);
+        return new ResponseEntity<>(p, HttpStatus.CREATED);
+
     }
 
 }
