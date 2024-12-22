@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.net.UnknownHostException;
 
@@ -24,6 +25,13 @@ public class ExceptionHandlers {
         ProductNotFoundExceptionDTO exceptionDTO = new ProductNotFoundExceptionDTO();
         exceptionDTO.setMessage("the product with Product id " + e.getProductId()+" is not found");
         exceptionDTO.setResolution("enter the correct product id");
+        return new ResponseEntity<>(exceptionDTO,HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ProductNotFoundExceptionDTO> TypeMismatch(MethodArgumentTypeMismatchException e){
+        ProductNotFoundExceptionDTO exceptionDTO = new ProductNotFoundExceptionDTO();
+        exceptionDTO.setMessage("Product id is not valid, Enter the right PRODUCT_ID");
+        exceptionDTO.setResolution("The Product_ID should be numerical");
         return new ResponseEntity<>(exceptionDTO,HttpStatus.BAD_REQUEST);
     }
 
