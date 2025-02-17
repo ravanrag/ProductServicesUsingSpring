@@ -17,6 +17,5 @@ public class Product extends BaseModel{
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 }
