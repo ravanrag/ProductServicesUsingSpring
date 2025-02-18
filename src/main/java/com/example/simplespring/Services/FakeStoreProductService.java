@@ -28,7 +28,7 @@ public class FakeStoreProductService implements ProductService{
     private Product convertFakeStoreDTOtoProduct(FakeStoreProductDTO dto){
         Product p = new Product();
         p.setId(dto.getId());
-        p.setTitle(dto.getTitle());
+        p.setName(dto.getName());
         p.setPrice(dto.getPrice());
         p.setDescription(dto.getDescription());
         p.setImage(dto.getImage());
@@ -63,7 +63,7 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public Product replaceProduct(Long id, Product product){
         FakeStoreProductDTO fakeStoreProductDTO = new FakeStoreProductDTO();
-        fakeStoreProductDTO.setTitle(product.getTitle());
+        fakeStoreProductDTO.setName(product.getName());
         fakeStoreProductDTO.setImage(product.getImage());
         fakeStoreProductDTO.setDescription(product.getDescription());
 
@@ -90,8 +90,8 @@ public class FakeStoreProductService implements ProductService{
             fakeStoreProductDTO.setImage(product.getImage());
         if (product.getPrice() != null)
             fakeStoreProductDTO.setPrice(product.getPrice());
-        if (product.getTitle() != null)
-            fakeStoreProductDTO.setTitle(product.getTitle());
+        if (product.getName() != null)
+            fakeStoreProductDTO.setName(product.getName());
         if (product.getCategory() != null) {
             fakeStoreProductDTO.setCategory(product.getCategory());
         }
@@ -114,5 +114,10 @@ public class FakeStoreProductService implements ProductService{
         }catch(Exception e){
             return false;
         }
+    }
+
+    @Override
+    public Product createProduct(Product product) {
+        return null;
     }
 }

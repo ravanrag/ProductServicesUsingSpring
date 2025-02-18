@@ -4,6 +4,7 @@ import com.example.simplespring.Dtos.ProductUpdateDTO;
 import com.example.simplespring.Exceptions.ProductNotFoundException;
 import com.example.simplespring.Models.*;
 import com.example.simplespring.Services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     private ProductService productService;
-    ProductController(ProductService productService){
+    ProductController(@Qualifier("SelfProductServices") ProductService productService){
         this.productService=productService;
     }
     @GetMapping("/{id}")
@@ -35,12 +36,17 @@ public class ProductController {
         Product p = productService.replaceProduct(Id, product);
         return new ResponseEntity<>(p, HttpStatus.CREATED);
     }
+    @PostMapping
+    public Product createProduct(@RequestBody Product product){
+        return productService.createProduct(product);
+    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") Long Id, @RequestBody ProductUpdateDTO productUpdateDTO) throws ProductNotFoundException {
         Product p = productService.updateProduct(Id, productUpdateDTO);
         return new ResponseEntity<>(p,HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
         boolean isDeleted = productService.deleteProduct(id);
