@@ -50,10 +50,14 @@ public class SelfProductServices implements ProductService{
     public Product createProduct(Product product) {
         Category category = product.getCategory();
         if(category.getId()==null) {
+            Category existingCategory = categoryRepo.findByName(category.getName());
+            if (existingCategory != null) {
+                category = existingCategory;
+            } else {
+                category = categoryRepo.save(category);
+            }
             Category savedCategory = categoryRepo.save(category);
             product.setCategory(savedCategory);
-        }else {
-
         }
 
         return productRepo.save(product);
