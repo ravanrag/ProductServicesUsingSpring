@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Primary
+
 @Service("SelfProductServices")
 public class SelfProductServices implements ProductService{
 
@@ -23,7 +23,7 @@ public class SelfProductServices implements ProductService{
     }
     @Override
     public Product getProductByID(Long id) throws ProductNotFoundException {
-        return null;
+        return productRepo.findById(id).get();
     }
 
     @Override

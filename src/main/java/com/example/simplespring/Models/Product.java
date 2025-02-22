@@ -13,6 +13,6 @@ public class Product extends BaseModel{
     private double price;
     private String image;
     private String description;
-    @ManyToOne
+//    @ManyToOne
     private Category category;
 }
