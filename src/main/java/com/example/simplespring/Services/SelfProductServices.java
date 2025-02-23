@@ -59,7 +59,8 @@ public class SelfProductServices implements ProductService{
             Category savedCategory = categoryRepo.save(category);
             product.setCategory(savedCategory);
         }
-
+        //cannot save new category that comes with "id". As Category ID is auto generated.
+        //don't try waste time to save new category that comes with id. It will throw exception.
         return productRepo.save(product);
 
     }
