@@ -36,7 +36,7 @@ public class ProductController {
         Product p = productService.replaceProduct(Id, product);
         return new ResponseEntity<>(p, HttpStatus.CREATED);
     }
-    @PostMapping
+    @PostMapping({"","/"})
     public Product createProduct(@RequestBody Product product){
         return productService.createProduct(product);
     }
