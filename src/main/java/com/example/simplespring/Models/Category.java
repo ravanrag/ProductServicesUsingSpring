@@ -19,5 +19,5 @@ import java.util.List;
 public class Category extends BaseModel{
     @OneToMany(mappedBy = "category")
     @JsonIgnore
-    List<Product> products ;
+    List<Product> productsList;
 }

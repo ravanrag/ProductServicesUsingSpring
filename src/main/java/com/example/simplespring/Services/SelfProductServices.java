@@ -28,7 +28,7 @@ public class SelfProductServices implements ProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        return List.of(productRepo.findAll().toArray(new Product[0]));
     }
 
     @Override
