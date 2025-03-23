@@ -22,12 +22,13 @@ class ProductControllerTest {
 
     @Test
     void TestingGetProductByIDFeature() throws ProductNotFoundException {
-        long id =1l;
+        long id =2l;
         Product product =new Product();
         product.setName("Title");
         product.setId(1l);
         when(productService.getProductByID(1l)).thenReturn(product);
         Product p = productController.getSingleProduct(id).getBody();
+
         Assertions.assertEquals(1l,p.getId());
     }
 
