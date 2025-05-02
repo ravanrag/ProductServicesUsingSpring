@@ -18,6 +18,7 @@ public class ExceptionHandlers {
     }
     @ExceptionHandler(UnknownHostException.class)
     public  ResponseEntity<String> hostnotfound(){
+
         return new ResponseEntity<>("Unreachable Backend",HttpStatus.BAD_GATEWAY);
     }
     @ExceptionHandler(ProductNotFoundException.class)
